@@ -28,7 +28,6 @@ const ResetStyle = createGlobalStyle`
 	}
 	body {
 		line-height: 1;
-		margin: 0px;
 	}
 	ol, ul {
 		list-style: none;

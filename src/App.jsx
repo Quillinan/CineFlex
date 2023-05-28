@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
-import './style/GlobalStyle';
+import ResetStyle from './style/ResetStyle';
+import GlobalStyle from './style/GlobalStyle';
 import styled from 'styled-components';
 import HomePage from './pages/HomePage/HomePage';
 import SessionsPage from './pages/SessionsPage/SessionsPage';
@@ -9,16 +9,20 @@ import SuccessPage from './pages/SuccessPage/SuccessPage';
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <NavContainer>CINEFLEX</NavContainer>
+    <>
+      <ResetStyle />
+      <GlobalStyle />
+      <BrowserRouter>
+        <NavContainer>CINEFLEX</NavContainer>
 
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/sessions-page" element={<SessionsPage />} />
-        <Route path="/seats-page" element={<SeatsPage />} />
-        <Route path="/success-page" element={<SuccessPage />} />
-      </Routes>
-    </BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/sessions-page" element={<SessionsPage />} />
+          <Route path="/seats-page" element={<SeatsPage />} />
+          <Route path="/success-page" element={<SuccessPage />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
