@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import './style/GlobalStyle';
 import styled from 'styled-components';
 import HomePage from './pages/HomePage/HomePage';
 import SessionsPage from './pages/SessionsPage/SessionsPage';
 import SeatsPage from './pages/SeatsPage/SeatsPage';
 import SuccessPage from './pages/SuccessPage/SuccessPage';
-import './style/ResetStyle';
-import './style/GlobalStyle';
 
 export default function App() {
   return (
