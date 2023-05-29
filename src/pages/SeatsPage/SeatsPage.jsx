@@ -72,19 +72,26 @@ export default function SeatsPage() {
         cpf: buyerCPF,
       };
 
-      // const response = await axios.post(
-      //   'https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many',
-      //   data
-      // );
+      const response = await axios.post(
+        'https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many',
+        data
+      );
 
-      // console.log(response.data);
+      if (response.status === 200) {
+        const reservationData = {
+          ids: data.ids,
+          name: data.name,
+          cpf: data.cpf,
+          selectedSeats,
+          movieTitle: movie.title,
+          dayDate: day.date,
+          time: name,
+        };
 
-      navigate('/success-page', { state: { data, sessionId } });
+        navigate('/success-page', { state: { reservationData } });
+      }
     } catch (error) {
       console.error(error);
-      alert(
-        'Ocorreu um erro ao processar a reserva. Por favor, tente novamente.'
-      );
     }
   };
 
