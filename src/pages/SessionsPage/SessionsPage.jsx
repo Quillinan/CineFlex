@@ -7,6 +7,7 @@ export default function SessionsPage() {
   const { movieId } = useParams();
   const [sessions, setSessions] = useState([]);
   const [posterURL, setPosterURL] = useState('');
+  const [title, setTitle] = useState('');
 
   useEffect(() => {
     const fetchSessions = async () => {
@@ -14,9 +15,10 @@ export default function SessionsPage() {
         const response = await axios.get(
           `https://mock-api.driven.com.br/api/v8/cineflex/movies/${movieId}/showtimes`
         );
-        const { days, posterURL } = response.data;
+        const { days, posterURL, title } = response.data;
         setSessions(days);
         setPosterURL(posterURL);
+        setTitle(title);
       } catch (error) {
         console.error(error);
       }
@@ -49,7 +51,7 @@ export default function SessionsPage() {
           <img src={posterURL} alt="poster" />
         </div>
         <div>
-          <p>Tudo em todo lugar ao mesmo tempo</p>
+          <p>{title}</p>
         </div>
       </FooterContainer>
     </PageContainer>

@@ -72,14 +72,14 @@ export default function SeatsPage() {
         cpf: buyerCPF,
       };
 
-      const response = await axios.post(
-        'https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many',
-        data
-      );
+      // const response = await axios.post(
+      //   'https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many',
+      //   data
+      // );
 
-      console.log(response.data);
+      // console.log(response.data);
 
-      navigate('/success-page');
+      navigate('/success-page', { state: { data, sessionId } });
     } catch (error) {
       console.error(error);
       alert(
