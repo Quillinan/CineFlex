@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function SeatsPage() {
@@ -10,6 +10,8 @@ export default function SeatsPage() {
   const [day, setDay] = useState('');
   const [name, setName] = useState('');
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [buyerName, setBuyerName] = useState('');
+  const [buyerCPF, setBuyerCPF] = useState('');
 
   useEffect(() => {
     const fetchSeats = async () => {
@@ -50,6 +52,42 @@ export default function SeatsPage() {
     }
   };
 
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    if (!buyerName || !buyerCPF) {
+      alert('Por favor, preencha seu nome e CPF');
+      return;
+    }
+
+    if (selectedSeats.length === 0) {
+      alert('Por favor, selecione pelo menos um assento');
+      return;
+    }
+
+    try {
+      const data = {
+        ids: selectedSeats.map((seat) => seat.id),
+        name: buyerName,
+        cpf: buyerCPF,
+      };
+
+      const response = await axios.post(
+        'https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many',
+        data
+      );
+
+      console.log(response.data);
+
+      navigate('/success-page');
+    } catch (error) {
+      console.error(error);
+      alert(
+        'Ocorreu um erro ao processar a reserva. Por favor, tente novamente.'
+      );
+    }
+  };
+
   return (
     <PageContainer>
       Selecione o(s) assento(s)
@@ -84,10 +122,18 @@ export default function SeatsPage() {
       </CaptionContainer>
       <FormContainer>
         Nome do Comprador:
-        <input placeholder="Digite seu nome..." />
+        <input
+          placeholder="Digite seu nome..."
+          value={buyerName}
+          onChange={(event) => setBuyerName(event.target.value)}
+        />
         CPF do Comprador:
-        <input placeholder="Digite seu CPF..." />
-        <button>Reservar Assento(s)</button>
+        <input
+          placeholder="Digite seu CPF..."
+          value={buyerCPF}
+          onChange={(event) => setBuyerCPF(event.target.value)}
+        />
+        <button onClick={handleSubmit}>Reservar Assento(s)</button>
       </FormContainer>
       <FooterContainer>
         <div>
