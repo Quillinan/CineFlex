@@ -88,7 +88,7 @@ export default function SeatsPage() {
           time: name,
         };
 
-        navigate('/success-page', { state: { reservationData } });
+        navigate('/sucesso', { state: { reservationData } });
       }
     } catch (error) {
       console.error(error);
@@ -108,6 +108,7 @@ export default function SeatsPage() {
             isSelected={selectedSeats.some(
               (selectedSeat) => selectedSeat.id === seat.id
             )}
+            data-test="seat"
           >
             {seat.name}
           </SeatItem>
@@ -133,16 +134,20 @@ export default function SeatsPage() {
           placeholder="Digite seu nome..."
           value={buyerName}
           onChange={(event) => setBuyerName(event.target.value)}
+          data-test="client-name"
         />
         CPF do Comprador:
         <input
           placeholder="Digite seu CPF..."
           value={buyerCPF}
           onChange={(event) => setBuyerCPF(event.target.value)}
+          data-test="client-cpf"
         />
-        <button onClick={handleSubmit}>Reservar Assento(s)</button>
+        <button onClick={handleSubmit} data-test="book-seat-btn">
+          Reservar Assento(s)
+        </button>
       </FormContainer>
-      <FooterContainer>
+      <FooterContainer data-test="footer">
         <div>
           <img src={movie.posterURL} alt="poster" />
         </div>

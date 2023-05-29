@@ -16,7 +16,7 @@ export default function SuccessPage() {
         Pedido feito <br /> com sucesso!
       </h1>
 
-      <TextContainer>
+      <TextContainer data-test="movie-info">
         <strong>
           <p>Filme e sessão</p>
         </strong>
@@ -26,7 +26,7 @@ export default function SuccessPage() {
         </p>
       </TextContainer>
 
-      <TextContainer>
+      <TextContainer data-test="seats-info">
         <strong>
           <p>Ingressos</p>
         </strong>
@@ -36,7 +36,7 @@ export default function SuccessPage() {
           ))}
       </TextContainer>
 
-      <TextContainer>
+      <TextContainer data-test="client-info">
         <strong>
           <p>Comprador</p>
         </strong>
@@ -44,7 +44,9 @@ export default function SuccessPage() {
         <p>CPF: {reservationData.cpf}</p>
       </TextContainer>
 
-      <button onClick={handleBackToHome}>Voltar para Home</button>
+      <button onClick={handleBackToHome} data-test="go-home-btn">
+        Voltar para Home
+      </button>
     </PageContainer>
   );
 }
